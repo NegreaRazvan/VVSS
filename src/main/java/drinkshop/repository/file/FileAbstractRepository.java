@@ -24,7 +24,7 @@ public abstract class FileAbstractRepository<ID, E>
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("File operation failed: " + fileName, e);
         }
     }
 
@@ -37,7 +37,7 @@ public abstract class FileAbstractRepository<ID, E>
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("File operation failed: " + fileName, e);
         }
     }
 
