@@ -12,7 +12,7 @@ class ProductTest {
 
     @BeforeEach
     void setUp() {
-        product =new Product(100, "Limonada", 10.0, CategorieBautura.JUICE, TipBautura.WATER_BASED);
+        product = new Product(100, "Limonada", 10.0, "JUICE", "WATER_BASED");
     }
 
     @AfterEach
@@ -37,24 +37,24 @@ class ProductTest {
 
     @Test
     void getCategorie() {
-        assert CategorieBautura.JUICE.equals(product.getCategorie());
+        assert "JUICE".equals(product.getCategorie());
     }
 
     @Test
     void setCategorie() {
-        product.setCategorie(CategorieBautura.SMOOTHIE);
-        assert CategorieBautura.SMOOTHIE.equals(product.getCategorie());
+        product.setCategorie("SMOOTHIE");
+        assert "SMOOTHIE".equals(product.getCategorie());
     }
 
     @Test
     void getTip() {
-        assert TipBautura.WATER_BASED.equals(product.getTip());
+        assert "WATER_BASED".equals(product.getTip());
     }
 
     @Test
     void setTip() {
-        product.setTip(TipBautura.BASIC);
-        assert TipBautura.BASIC.equals(product.getTip());
+        product.setTip("BASIC");
+        assert "BASIC".equals(product.getTip());
     }
 
     @Test

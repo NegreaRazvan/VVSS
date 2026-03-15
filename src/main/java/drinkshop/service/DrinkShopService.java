@@ -6,7 +6,9 @@ import drinkshop.receipt.ReceiptGenerator;
 import drinkshop.reports.DailyReportService;
 import drinkshop.repository.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DrinkShopService {
 
@@ -34,7 +36,7 @@ public class DrinkShopService {
         productService.addProduct(p);
     }
 
-    public void updateProduct(int id, String name, double price, CategorieBautura categorie, TipBautura tip) {
+    public void updateProduct(int id, String name, double price, String categorie, String tip) {
         productService.updateProduct(id, name, price, categorie, tip);
     }
 
@@ -46,11 +48,11 @@ public class DrinkShopService {
         return productService.getAllProducts();
     }
 
-    public List<Product> filtreazaDupaCategorie(CategorieBautura categorie) {
+    public List<Product> filtreazaDupaCategorie(String categorie) {
         return productService.filterByCategorie(categorie);
     }
 
-    public List<Product> filtreazaDupaTip(TipBautura tip) {
+    public List<Product> filtreazaDupaTip(String tip) {
         return productService.filterByTip(tip);
     }
 
@@ -80,13 +82,32 @@ public class DrinkShopService {
     }
 
     // ---------- STOCK + RECIPE ----------
-    public void comandaProdus(Product produs) {
+    public void comandaProdus(Product produs, Order order) {
         Reteta reteta = retetaService.findById(produs.getId());
 
         if (!stocService.areSuficient(reteta)) {
             throw new IllegalStateException("Stoc insuficient pentru produsul: " + produs.getNume());
         }
-        stocService.consuma(reteta);
+
+        // Save stock state for rollback
+        Map<Integer, Double> backup = new HashMap<>();
+        for (Stoc s : stocService.getAll()) {
+            backup.put(s.getId(), s.getCantitate());
+        }
+
+        try {
+            stocService.consuma(reteta);
+            order.computeTotalPrice();
+        } catch (Exception e) {
+            // Rollback stock to previous state
+            for (Stoc s : stocService.getAll()) {
+                if (backup.containsKey(s.getId())) {
+                    s.setCantitate(backup.get(s.getId()));
+                    stocService.update(s);
+                }
+            }
+            throw new IllegalStateException("Eroare la comanda produsului: " + produs.getNume() + ". Stocul a fost restaurat.", e);
+        }
     }
 
     public List<Reteta> getAllRetete() {

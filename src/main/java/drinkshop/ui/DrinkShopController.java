@@ -21,11 +21,11 @@ public class DrinkShopController {
     @FXML private TableColumn<Product, Integer> colProdId;
     @FXML private TableColumn<Product, String> colProdName;
     @FXML private TableColumn<Product, Double> colProdPrice;
-    @FXML private TableColumn<Product, CategorieBautura> colProdCategorie;
-    @FXML private TableColumn<Product, TipBautura> colProdTip;
+    @FXML private TableColumn<Product, String> colProdCategorie;
+    @FXML private TableColumn<Product, String> colProdTip;
     @FXML private TextField txtProdName, txtProdPrice;
-    @FXML private ComboBox<CategorieBautura> comboProdCategorie;
-    @FXML private ComboBox<TipBautura> comboProdTip;
+    @FXML private ComboBox<String> comboProdCategorie;
+    @FXML private ComboBox<String> comboProdTip;
 
     // ---------- RETETE ----------
     @FXML private TableView<Reteta> retetaTable;
@@ -71,8 +71,8 @@ public class DrinkShopController {
         colProdTip.setCellValueFactory(new PropertyValueFactory<>("tip"));
         productTable.setItems(productList);
 
-        comboProdCategorie.getItems().setAll(CategorieBautura.values());
-        comboProdTip.getItems().setAll(TipBautura.values());
+        comboProdCategorie.setEditable(true);
+        comboProdTip.setEditable(true);
 
         // RETETE
         colRetetaId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -127,11 +127,13 @@ public class DrinkShopController {
             alert.showAndWait();
             return;
         }
+        String categorie = comboProdCategorie.getValue() != null ? comboProdCategorie.getValue() : comboProdCategorie.getEditor().getText();
+        String tip = comboProdTip.getValue() != null ? comboProdTip.getValue() : comboProdTip.getEditor().getText();
         Product p = new Product(r.getId(),
                 txtProdName.getText(),
                 Double.parseDouble(txtProdPrice.getText()),
-                comboProdCategorie.getValue(),
-                comboProdTip.getValue());
+                categorie,
+                tip);
         service.addProduct(p);
         initData();
     }
@@ -140,9 +142,11 @@ public class DrinkShopController {
     private void onUpdateProduct() {
         Product selected = productTable.getSelectionModel().getSelectedItem();
         if (selected == null) return;
+        String categorie = comboProdCategorie.getValue() != null ? comboProdCategorie.getValue() : comboProdCategorie.getEditor().getText();
+        String tip = comboProdTip.getValue() != null ? comboProdTip.getValue() : comboProdTip.getEditor().getText();
         service.updateProduct(selected.getId(), txtProdName.getText(),
                 Double.parseDouble(txtProdPrice.getText()),
-                comboProdCategorie.getValue(), comboProdTip.getValue());
+                categorie, tip);
         initData();
     }
 
@@ -156,12 +160,14 @@ public class DrinkShopController {
 
     @FXML
     private void onFilterCategorie() {
-        productList.setAll(service.filtreazaDupaCategorie(comboProdCategorie.getValue()));
+        String val = comboProdCategorie.getValue() != null ? comboProdCategorie.getValue() : comboProdCategorie.getEditor().getText();
+        productList.setAll(service.filtreazaDupaCategorie(val));
     }
 
     @FXML
     private void onFilterTip() {
-        productList.setAll(service.filtreazaDupaTip(comboProdTip.getValue()));
+        String val = comboProdTip.getValue() != null ? comboProdTip.getValue() : comboProdTip.getEditor().getText();
+        productList.setAll(service.filtreazaDupaTip(val));
     }
 
     // ---------- RETETA NOUA ----------
