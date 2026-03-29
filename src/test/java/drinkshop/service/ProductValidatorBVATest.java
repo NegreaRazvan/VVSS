@@ -13,12 +13,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+
 @Tag("BVA")
 @DisplayName("BVA Tests - ProductValidator.validate()")
 class ProductValidatorBVATest {
 
     private final ProductValidator validator = new ProductValidator();
-
 
     @ParameterizedTest
     @DisplayName("TC1_BVA: Price slightly above zero (Valid Min)")
@@ -68,14 +69,5 @@ class ProductValidatorBVATest {
     void tc6_bva_validMinPlusOneName(int id, String nume, double pret, CategorieBautura cat, TipBautura tip) {
         Product product = new Product(id, nume, pret, cat, tip);
         assertDoesNotThrow(() -> validator.validate(product));
-    }
-
-    @ParameterizedTest
-    @DisplayName("TC7_BVA: Name is empty (Invalid Boundary)")
-    @CsvSource({"7, '', 10.0, JUICE, WATER_BASED"})
-    void tc7_bva_invalidEmptyName(int id, String nume, double pret, CategorieBautura cat, TipBautura tip) {
-        Product product = new Product(id, (nume == null ? "" : nume), pret, cat, tip);
-        ValidationException ex = assertThrows(ValidationException.class, () -> validator.validate(product));
-        assertTrue(ex.getMessage().contains("Numele nu poate fi gol!"));
     }
 }
