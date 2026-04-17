@@ -33,9 +33,18 @@ public class StocService {
     }
 
     public boolean areSuficient(Reteta reteta) {
+        if (reteta == null) {                                           // D1
+            throw new IllegalArgumentException("Reteta nu poate fi null");
+        }
         List<IngredientReteta> ingredienteNecesare = reteta.getIngrediente();
+        if (ingredienteNecesare == null) {                              // D2
+            return true;
+        }
+        if (ingredienteNecesare.isEmpty()) {                            // D3
+            return true;
+        }
 
-        for (IngredientReteta e : ingredienteNecesare) {
+        for (IngredientReteta e : ingredienteNecesare) {                // D4
             String ingredient = e.getDenumire();
             double necesar = e.getCantitate();
 
@@ -44,7 +53,10 @@ public class StocService {
                     .mapToDouble(Stoc::getCantitate)
                     .sum();
 
-            if (disponibil < necesar) {
+            if (necesar <= 0) {                                         // D5
+                continue;
+            }
+            if (disponibil < necesar) {                                 // D6
                 return false;
             }
         }
