@@ -5,78 +5,63 @@ import drinkshop.domain.Reteta;
 import drinkshop.domain.Stoc;
 import drinkshop.repository.Repository;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 /**
- * White-Box Testing (WBT) for StocService.areSuficient(Reteta)
+ * White-Box Testing (WBT) for StocService
+ * Refactored to use Mockito to meet Lab requirements (assert + verify).
  *
- * CFG Decisions:
- *   D1: reteta == null
- *   D2: ingredienteNecesare == null
- *   D3: ingredienteNecesare.isEmpty()
- *   D4: for-each loop condition (has more elements)
- *   D5: necesar <= 0
- *   D6: disponibil < necesar
+ * CFG Decisions (areSuficient):
+ * D1: reteta == null
+ * D2: ingredienteNecesare == null
+ * D3: ingredienteNecesare.isEmpty()
+ * D4: for-each loop condition (has more elements)
+ * D5: necesar <= 0
+ * D6: disponibil < necesar
  *
  * Cyclomatic Complexity: CC = 6 decisions + 1 = 7
  */
-@DisplayName("WBT Tests - StocService.areSuficient()")
+@ExtendWith(MockitoExtension.class)
+@DisplayName("WBT Tests - StocService (Mockito)")
 class StocServiceWBTTest {
 
-    private List<Stoc> stocList;
+    @Mock
+    private Repository<Integer, Stoc> stocRepo;
+
+    @InjectMocks
     private StocService stocService;
+
+    // Folosim o lista reala pentru a o returna prin mock la findAll()
+    private List<Stoc> stocList;
 
     @BeforeEach
     void setUp() {
         stocList = new ArrayList<>();
-        Repository<Integer, Stoc> stocRepo = new Repository<>() {
-            @Override
-            public Stoc findOne(Integer id) {
-                return stocList.stream().filter(s -> s.getId() == id).findFirst().orElse(null);
-            }
-
-            @Override
-            public List<Stoc> findAll() {
-                return new ArrayList<>(stocList);
-            }
-
-            @Override
-            public Stoc save(Stoc s) {
-                stocList.add(s);
-                return s;
-            }
-
-            @Override
-            public Stoc delete(Integer id) {
-                Stoc s = findOne(id);
-                stocList.remove(s);
-                return s;
-            }
-
-            @Override
-            public Stoc update(Stoc s) {
-                stocList.removeIf(x -> x.getId() == s.getId());
-                stocList.add(s);
-                return s;
-            }
-        };
-        stocService = new StocService(stocRepo);
+        // Setam mock-ul sa returneze lista noastra de fiecare data cand se apeleaza findAll().
+        // lenient() previne exceptiile in testele unde findAll() nu ajunge sa fie apelat (ex: tc01, tc02).
+        lenient().when(stocRepo.findAll()).thenReturn(stocList);
     }
 
     @AfterEach
     void tearDown() {
         stocList = null;
-        stocService = null;
     }
 
-    // -------------------------------------------------------------------------
-    // TC01 – Path P1 | Coverage: SC, DC(D1=T), CC, DCC, APC
-    // Non-valid input: reteta null -> D1=T -> throws IllegalArgumentException
-    // -------------------------------------------------------------------------
+    // =========================================================================
+    // TESTELE ORIGINALE PENTRU areSuficient(Reteta) - Neschimbate la logica
+    // =========================================================================
+
     @Test
     @DisplayName("TC01 [P1] reteta=null -> throws IllegalArgumentException")
     void tc01_reteta_null_throwsIllegalArgumentException() {
@@ -84,10 +69,6 @@ class StocServiceWBTTest {
                 () -> stocService.areSuficient(null));
     }
 
-    // -------------------------------------------------------------------------
-    // TC02 – Path P2 | Coverage: SC, DC(D1=F, D2=T), CC, DCC, APC, LC(0 iters)
-    // Non-valid input: ingredienteNecesare==null -> D2=T -> returns true
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC02 [P2] ingredienteNecesare=null -> returns true")
     void tc02_ingredienteNull_returnsTrue() {
@@ -95,10 +76,6 @@ class StocServiceWBTTest {
         assertTrue(stocService.areSuficient(reteta));
     }
 
-    // -------------------------------------------------------------------------
-    // TC03 – Path P3 | Coverage: SC, DC(D3=T), CC, DCC, APC, LC(0 iters)
-    // Valid input: lista goala -> D3=T -> returns true
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC03 [P3] ingredienteNecesare empty -> returns true")
     void tc03_ingredienteEmpty_returnsTrue() {
@@ -106,10 +83,6 @@ class StocServiceWBTTest {
         assertTrue(stocService.areSuficient(reteta));
     }
 
-    // -------------------------------------------------------------------------
-    // TC04 – Path P6 | Coverage: SC, DC(D5=T), CC, DCC, MCC, APC, LC(1 iter)
-    // Valid input: cantitate=0 -> D5=T (necesar<=0) -> continue -> return true
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC04 [P6] necesar=0 (cantitate<=0) -> skipped, returns true")
     void tc04_necesar_zero_returnsTrue() {
@@ -118,10 +91,6 @@ class StocServiceWBTTest {
         assertTrue(stocService.areSuficient(reteta));
     }
 
-    // -------------------------------------------------------------------------
-    // TC05 – Path P5 | Coverage: SC, DC(D6=T), CC, DCC, MCC, APC, LC(1 iter)
-    // Non-valid input: stoc insuficient -> D6=T -> returns false
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC05 [P5] disponibil(50) < necesar(100) -> returns false")
     void tc05_stocInsuficient_returnsFalse() {
@@ -130,10 +99,6 @@ class StocServiceWBTTest {
         assertFalse(stocService.areSuficient(reteta));
     }
 
-    // -------------------------------------------------------------------------
-    // TC06 – Path P7 | Coverage: SC, DC(D6=F), CC, DCC, MCC, APC, LC(1 iter)
-    // Valid input: stoc suficient -> D6=F -> return true
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC06 [P7] disponibil(150) >= necesar(100) -> returns true")
     void tc06_stocSuficient_returnsTrue() {
@@ -142,10 +107,6 @@ class StocServiceWBTTest {
         assertTrue(stocService.areSuficient(reteta));
     }
 
-    // -------------------------------------------------------------------------
-    // TC07 – Path P7 | Coverage: SC, DC, CC, DCC, MCC, APC, LC(2 iters)
-    // Valid input: 2 ingrediente, ambele suficiente -> return true
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC07 [P7] 2 ingrediente suficiente -> returns true")
     void tc07_douaIngredienteSuficiente_returnsTrue() {
@@ -158,10 +119,6 @@ class StocServiceWBTTest {
         assertTrue(stocService.areSuficient(reteta));
     }
 
-    // -------------------------------------------------------------------------
-    // TC08 – APC, LC(2 iters, al doilea esueaza)
-    // Valid input: 2 ingrediente, al doilea insuficient -> returns false
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC08 al doilea ingredient insuficient -> returns false")
     void tc08_alDoileaIngredientInsuficient_returnsFalse() {
@@ -174,9 +131,6 @@ class StocServiceWBTTest {
         assertFalse(stocService.areSuficient(reteta));
     }
 
-    // -------------------------------------------------------------------------
-    // TC09 – MCC boundary: disponibil == necesar (exact) -> returns true
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC09 [MCC boundary] disponibil(100) == necesar(100) -> returns true")
     void tc09_disponibilEgalNecesar_returnsTrue() {
@@ -185,9 +139,6 @@ class StocServiceWBTTest {
         assertTrue(stocService.areSuficient(reteta));
     }
 
-    // -------------------------------------------------------------------------
-    // TC10 – APC, LC(1 iter): cantitate negativa -> D5=T (necesar<=0) -> continue -> return true
-    // -------------------------------------------------------------------------
     @Test
     @DisplayName("TC10 necesar negativ (-5) -> skipped, returns true")
     void tc10_necesar_negativ_returnsTrue() {
@@ -196,40 +147,48 @@ class StocServiceWBTTest {
         assertTrue(stocService.areSuficient(reteta));
     }
 
+    // =========================================================================
+    // TESTE ADIȚIONALE PENTRU FULL COVERAGE & MOCKITO VERIFY
+    // =========================================================================
+
     @Test
-    @DisplayName("Test getAll() returneaza toate inregistrarile din repo")
+    @DisplayName("Test getAll() - returneaza inregistrarile si apeleaza findAll")
     void test_getAll() {
-        stocService.add(new Stoc(1, "cafea", 10.0, 0.0));
+        stocList.add(new Stoc(1, "cafea", 10.0, 0.0));
+
         List<Stoc> rezultate = stocService.getAll();
+
         assertEquals(1, rezultate.size());
         assertEquals("cafea", rezultate.get(0).getIngredient());
+        verify(stocRepo, times(1)).findAll(); // Verificare mock
     }
 
     @Test
-    @DisplayName("Test add() salveaza cu succes o entitate")
+    @DisplayName("Test add() - apeleaza save pe repository")
     void test_add() {
         Stoc s = new Stoc(1, "lapte", 50.0, 0.0);
+
         stocService.add(s);
-        assertEquals(1, stocList.size());
+
+        verify(stocRepo, times(1)).save(s); // Verificare mock
     }
 
     @Test
-    @DisplayName("Test update() modifica entitatea existenta")
+    @DisplayName("Test update() - apeleaza update pe repository")
     void test_update() {
         Stoc s = new Stoc(1, "sirop", 20.0, 0.0);
-        stocService.add(s);
-        s.setCantitate(30.0); // modificam
+
         stocService.update(s);
-        assertEquals(30.0, stocList.get(0).getCantitate());
+
+        verify(stocRepo, times(1)).update(s); // Verificare mock
     }
 
     @Test
-    @DisplayName("Test delete() sterge entitatea existenta")
+    @DisplayName("Test delete() - apeleaza delete pe repository")
     void test_delete() {
-        Stoc s = new Stoc(1, "cacao", 10.0, 0.0);
-        stocService.add(s);
         stocService.delete(1);
-        assertTrue(stocList.isEmpty());
+
+        verify(stocRepo, times(1)).delete(1); // Verificare mock
     }
 
     @Test
@@ -239,51 +198,62 @@ class StocServiceWBTTest {
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 100.0)));
 
         assertThrows(IllegalStateException.class, () -> stocService.consuma(reteta));
+        verify(stocRepo, never()).update(any()); // Niciun update daca arunca exceptie
     }
 
     @Test
-    @DisplayName("consuma() isi opreste executia pentru un ingredient cand necesarul a fost indeplinit (ramas <= 0)")
+    @DisplayName("consuma() isi opreste executia pentru un ingredient cand necesarul a fost indeplinit")
     void test_consuma_intrerupeCandRamasZero() {
-        // Avem 2 pungi de zahar, dar prima este suficienta. Bucla for trebuie sa se opreasca la primul.
-        stocList.add(new Stoc(1, "zahar", 100.0, 0.0));
-        stocList.add(new Stoc(2, "zahar", 50.0, 0.0));
+        Stoc stoc1 = new Stoc(1, "zahar", 100.0, 0.0);
+        Stoc stoc2 = new Stoc(2, "zahar", 50.0, 0.0);
+        stocList.add(stoc1);
+        stocList.add(stoc2);
+
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("zahar", 60.0)));
 
         stocService.consuma(reteta);
 
-        // Cautam stocurile dupa ID, pentru ca operatiunea de update (din mock repo) le schimba ordinea
-        double cantitateStoc1 = stocList.stream().filter(s -> s.getId() == 1).findFirst().get().getCantitate();
-        double cantitateStoc2 = stocList.stream().filter(s -> s.getId() == 2).findFirst().get().getCantitate();
-
         // Prima inregistrare a fost consumata partial
-        assertEquals(40.0, cantitateStoc1);
-        // A doua inregistrare a ramas complet neatinsa
-        assertEquals(50.0, cantitateStoc2);
+        assertEquals(40.0, stoc1.getCantitate());
+        // A doua inregistrare a ramas neatinsa
+        assertEquals(50.0, stoc2.getCantitate());
+
+        // Verificam ca s-a facut update doar pentru stoc1
+        verify(stocRepo, times(1)).update(stoc1);
+        verify(stocRepo, never()).update(stoc2);
     }
 
     @Test
     @DisplayName("consuma() extrage din multiple intrari de stoc pana la satisfacerea necesarului")
     void test_consuma_extrageDinMaiMulteStocuri() {
-        // Pentru necesarul de 80, consumam tot din primul si restul din al doilea
-        stocList.add(new Stoc(1, "apa", 50.0, 0.0));
-        stocList.add(new Stoc(2, "apa", 50.0, 0.0));
+        Stoc stoc1 = new Stoc(1, "apa", 50.0, 0.0);
+        Stoc stoc2 = new Stoc(2, "apa", 50.0, 0.0);
+        stocList.add(stoc1);
+        stocList.add(stoc2);
+
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 80.0)));
 
         stocService.consuma(reteta);
 
-        assertEquals(0.0, stocList.stream().filter(s -> s.getId() == 1).findFirst().get().getCantitate());
-        assertEquals(20.0, stocList.stream().filter(s -> s.getId() == 2).findFirst().get().getCantitate());
+        assertEquals(0.0, stoc1.getCantitate());
+        assertEquals(20.0, stoc2.getCantitate());
+
+        // Verificam ca s-a facut update la ambele intrari
+        verify(stocRepo, times(1)).update(stoc1);
+        verify(stocRepo, times(1)).update(stoc2);
     }
 
     @Test
-    @DisplayName("consuma() nu face modificari daca necesarul este 0 (intra direct pe conditia ramas <= 0)")
+    @DisplayName("consuma() nu face modificari daca necesarul este 0")
     void test_consuma_cantitateZero() {
-        stocList.add(new Stoc(1, "apa", 100.0, 0.0));
+        Stoc stoc1 = new Stoc(1, "apa", 100.0, 0.0);
+        stocList.add(stoc1);
+
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 0.0)));
 
         stocService.consuma(reteta);
 
-        // Stocul ramane neschimbat
-        assertEquals(100.0, stocList.get(0).getCantitate());
+        assertEquals(100.0, stoc1.getCantitate());
+        verify(stocRepo, never()).update(any()); // Nu s-a consumat nimic
     }
 }
