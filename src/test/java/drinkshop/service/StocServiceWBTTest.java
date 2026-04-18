@@ -195,4 +195,95 @@ class StocServiceWBTTest {
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", -5.0)));
         assertTrue(stocService.areSuficient(reteta));
     }
+
+    @Test
+    @DisplayName("Test getAll() returneaza toate inregistrarile din repo")
+    void test_getAll() {
+        stocService.add(new Stoc(1, "cafea", 10.0, 0.0));
+        List<Stoc> rezultate = stocService.getAll();
+        assertEquals(1, rezultate.size());
+        assertEquals("cafea", rezultate.get(0).getIngredient());
+    }
+
+    @Test
+    @DisplayName("Test add() salveaza cu succes o entitate")
+    void test_add() {
+        Stoc s = new Stoc(1, "lapte", 50.0, 0.0);
+        stocService.add(s);
+        assertEquals(1, stocList.size());
+    }
+
+    @Test
+    @DisplayName("Test update() modifica entitatea existenta")
+    void test_update() {
+        Stoc s = new Stoc(1, "sirop", 20.0, 0.0);
+        stocService.add(s);
+        s.setCantitate(30.0); // modificam
+        stocService.update(s);
+        assertEquals(30.0, stocList.get(0).getCantitate());
+    }
+
+    @Test
+    @DisplayName("Test delete() sterge entitatea existenta")
+    void test_delete() {
+        Stoc s = new Stoc(1, "cacao", 10.0, 0.0);
+        stocService.add(s);
+        stocService.delete(1);
+        assertTrue(stocList.isEmpty());
+    }
+
+    @Test
+    @DisplayName("consuma() arunca IllegalStateException daca stocul nu este suficient")
+    void test_consuma_stocInsuficient_throwsException() {
+        stocList.add(new Stoc(1, "apa", 20.0, 0.0));
+        Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 100.0)));
+
+        assertThrows(IllegalStateException.class, () -> stocService.consuma(reteta));
+    }
+
+    @Test
+    @DisplayName("consuma() isi opreste executia pentru un ingredient cand necesarul a fost indeplinit (ramas <= 0)")
+    void test_consuma_intrerupeCandRamasZero() {
+        // Avem 2 pungi de zahar, dar prima este suficienta. Bucla for trebuie sa se opreasca la primul.
+        stocList.add(new Stoc(1, "zahar", 100.0, 0.0));
+        stocList.add(new Stoc(2, "zahar", 50.0, 0.0));
+        Reteta reteta = new Reteta(1, List.of(new IngredientReteta("zahar", 60.0)));
+
+        stocService.consuma(reteta);
+
+        // Cautam stocurile dupa ID, pentru ca operatiunea de update (din mock repo) le schimba ordinea
+        double cantitateStoc1 = stocList.stream().filter(s -> s.getId() == 1).findFirst().get().getCantitate();
+        double cantitateStoc2 = stocList.stream().filter(s -> s.getId() == 2).findFirst().get().getCantitate();
+
+        // Prima inregistrare a fost consumata partial
+        assertEquals(40.0, cantitateStoc1);
+        // A doua inregistrare a ramas complet neatinsa
+        assertEquals(50.0, cantitateStoc2);
+    }
+
+    @Test
+    @DisplayName("consuma() extrage din multiple intrari de stoc pana la satisfacerea necesarului")
+    void test_consuma_extrageDinMaiMulteStocuri() {
+        // Pentru necesarul de 80, consumam tot din primul si restul din al doilea
+        stocList.add(new Stoc(1, "apa", 50.0, 0.0));
+        stocList.add(new Stoc(2, "apa", 50.0, 0.0));
+        Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 80.0)));
+
+        stocService.consuma(reteta);
+
+        assertEquals(0.0, stocList.stream().filter(s -> s.getId() == 1).findFirst().get().getCantitate());
+        assertEquals(20.0, stocList.stream().filter(s -> s.getId() == 2).findFirst().get().getCantitate());
+    }
+
+    @Test
+    @DisplayName("consuma() nu face modificari daca necesarul este 0 (intra direct pe conditia ramas <= 0)")
+    void test_consuma_cantitateZero() {
+        stocList.add(new Stoc(1, "apa", 100.0, 0.0));
+        Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 0.0)));
+
+        stocService.consuma(reteta);
+
+        // Stocul ramane neschimbat
+        assertEquals(100.0, stocList.get(0).getCantitate());
+    }
 }
