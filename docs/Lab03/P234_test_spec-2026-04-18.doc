@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>testspec Proiect234 - mair3573_WBT</title>
+<link type="text/css" rel="stylesheet" href="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/css/tl_documents.css" />
+<style type="text/css" media="print">.notprintable { display:none;}</style>
+</head>
+<body>
+<div>
+<div style="float:right;">TestLink Community [configure $tlCfg-&gt;document_generator-&gt;company_name]</div>
+<div>&nbsp;</div><hr />
+<p style="text-align: center;"><img alt="TestLink logo" title="configure using $tlCfg->document_generator->company_logo"  width= height= src="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/images/tl-logo-transparent-25.png" /></p></div>
+<div class="doc_title"><p>Test Specification</p></div>
+<div class="doc_title" style="text-align:left;margin: auto;"><p>Test Project: Proiect234<br/>Test Suite: Proiect234 - mair3573_WBT</p></div>
+<div class="summary"><p id="printedby">Printed by TestLink on 18/04/2026</p></div>
+<div class="pagefooter" id="copyright">2012 &copy; TestLink Community</div>
+<h1 class="general" style="page-break-before: always">Table Of Contents</h1><div class="toc"><p style="padding-left: 20px;"><b><a href="#toc_1">1.mair3573_WBT</a></b></p>
+<p style="padding-left: 45px;"><a href="#toc_tc29767">P234-44: F02_TC01_INVALID</a></p><p style="padding-left: 45px;"><a href="#toc_tc29769">P234-45: F02_TC07_VALID</a></p></div><h1 class="doclevel" >Scope</h1>
+<div class="txtlevel"><p>Proiect de testare pentru studentii din grupa 234.</p></div>
+ <br/><a name='toc_1'></a>
+<h1 class='doclevel'>1.Test Suite : mair3573_WBT</h1>
+<a name="toc_tc29767"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P234-44: F02_TC01_INVALID&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">mair3573</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><table cellspacing="0" style="width:521pt">
+	<tbody>
+		<tr>
+			<td colspan="2" style="border-color:windowtext currentcolor windowtext windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap; width:521pt"><strong>input data</strong></td>
+		</tr>
+		<tr>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>reteta (Reteta)</strong></td>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>stoc list</strong></td>
+		</tr>
+		<tr>
+			<td style="border-color:currentcolor windowtext windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>null (reteta=null)</strong></td>
+			<td style="border-color:currentcolor windowtext windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>-</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<table cellspacing="0" style="width:401pt">
+	<tbody>
+		<tr>
+			<td colspan="2" style="height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap; width:401pt"><strong>output data</strong></td>
+		</tr>
+		<tr>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>expected</strong></td>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>actual result</strong></td>
+		</tr>
+		<tr>
+			<td style="border-color:currentcolor windowtext windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>throws IAE</strong></td>
+			<td style="height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>throws IAE</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Manual</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">mair3573_F02:  mair3573_F02 [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29769"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P234-45: F02_TC07_VALID&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">mair3573</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><table cellspacing="0" style="width:521pt">
+	<tbody>
+		<tr>
+			<td colspan="2" style="border-color:windowtext currentcolor windowtext windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap; width:521pt"><strong>input data</strong></td>
+		</tr>
+		<tr>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>reteta (Reteta)</strong></td>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>stoc list</strong></td>
+		</tr>
+		<tr>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>Reteta(1,[{apa,100},{zahar,200}])</strong></td>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>stoc:[apa=200,zahar=300]</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<table cellspacing="0" style="width:401pt">
+	<tbody>
+		<tr>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap; width:172pt"><strong>expected</strong></td>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap; width:229pt"><strong>actual result</strong></td>
+		</tr>
+		<tr>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>true</strong></td>
+			<td style="border-color:windowtext; height:15.0pt; text-align:center; vertical-align:middle; white-space:nowrap"><strong>true</strong></td>
+		</tr>
+	</tbody>
+</table>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Manual</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">mair3573_F02:  mair3573_F02 [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+
+</body>
+</html>
