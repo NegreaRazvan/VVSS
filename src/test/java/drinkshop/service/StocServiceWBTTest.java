@@ -23,15 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
  *   D6: disponibil < necesar
  *
  * Cyclomatic Complexity: CC = 6 decisions + 1 = 7
- *
- * Independent Paths:
- *   P1: D1=T -> throw IAE
- *   P2: D1=F, D2=T -> return true
- *   P3: D1=F, D2=F, D3=T -> return true
- *   P4: D1=F, D2=F, D3=F, D4=T, D5=T -> continue -> D4=F -> return true
- *   P5: D1=F, D2=F, D3=F, D4=T, D5=F, D6=T -> return false
- *   P6: D1=F, D2=F, D3=F, D4=T, D5=F, D6=F -> D4=F -> return true
- *   P7: P6 repeated 2 iterations -> return true
  */
 @DisplayName("WBT Tests - StocService.areSuficient()")
 class StocServiceWBTTest {
@@ -116,11 +107,11 @@ class StocServiceWBTTest {
     }
 
     // -------------------------------------------------------------------------
-    // TC04 – Path P4 | Coverage: SC, DC(D5=T), CC, DCC, MCC, APC, LC(1 iter)
+    // TC04 – Path P6 | Coverage: SC, DC(D5=T), CC, DCC, MCC, APC, LC(1 iter)
     // Valid input: cantitate=0 -> D5=T (necesar<=0) -> continue -> return true
     // -------------------------------------------------------------------------
     @Test
-    @DisplayName("TC04 [P4] necesar=0 (cantitate<=0) -> skipped, returns true")
+    @DisplayName("TC04 [P6] necesar=0 (cantitate<=0) -> skipped, returns true")
     void tc04_necesar_zero_returnsTrue() {
         stocList.add(new Stoc(1, "apa", 0.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 0.0)));
@@ -140,11 +131,11 @@ class StocServiceWBTTest {
     }
 
     // -------------------------------------------------------------------------
-    // TC06 – Path P6 | Coverage: SC, DC(D6=F), CC, DCC, MCC, APC, LC(1 iter)
+    // TC06 – Path P7 | Coverage: SC, DC(D6=F), CC, DCC, MCC, APC, LC(1 iter)
     // Valid input: stoc suficient -> D6=F -> return true
     // -------------------------------------------------------------------------
     @Test
-    @DisplayName("TC06 [P6] disponibil(150) >= necesar(100) -> returns true")
+    @DisplayName("TC06 [P7] disponibil(150) >= necesar(100) -> returns true")
     void tc06_stocSuficient_returnsTrue() {
         stocList.add(new Stoc(1, "apa", 150.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 100.0)));
