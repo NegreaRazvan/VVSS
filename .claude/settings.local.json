@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(powershell -Command ' *)",
+      "Bash(pip install *)",
+      "Bash(python *)",
+      "Bash(mvn test *)",
+      "PowerShell(Get-Command *)"
+    ]
+  }
+}
