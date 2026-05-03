@@ -14,6 +14,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
+/// Unit testing pentru clasa S folosind JUnit si Mockito
+/// avem evaluare cu assert si cu verify
+/// total 4 teste implementate
+/// Scenariu 3: S->R->E
+/// Step 1: Unit testing
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StocServiceMockitoTest {
 
