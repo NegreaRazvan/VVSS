@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="1" name="webFTP.features.login.invalid.LoginInvalidServerTest" skipped="0" tests="1" time="15.37" timestamp="2026-04-24 08:21:17"><testcase classname="webFTP.features.login.invalid.LoginInvalidServerTest" name="Login"><failure message="&#10;Expected: a collection containing a string containing &quot;Unable to connect to FTP server nessie.cs.ubbcluj.ro&quot;&#10;     but: " type="java.lang.AssertionError">
+Expected: a collection containing a string containing "Unable to connect to FTP server nessie.cs.ubbcluj.ro"
+     but: </failure><system-err>
+Expected: a collection containing a string containing "Unable to connect to FTP server nessie.cs.ubbcluj.ro"
+     but: &#13;
+webFTP.steps.serenity.LogoutPageSteps.should_see_logout_message(LogoutPageSteps.java:16)&#13;
+webFTP.features.login.invalid.LoginInvalidServerTest.login(LoginInvalidServerTest.java:33)&#13;
+</system-err></testcase></testsuite>
