@@ -23,6 +23,7 @@
       <scope>test</scope>
     </dependency>
 
+
       <dependency>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-base</artifactId>
@@ -67,6 +68,7 @@
       </dependency>
 
   </dependencies>
+
 
     <build>
     <plugins>
