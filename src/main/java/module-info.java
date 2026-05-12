@@ -2,8 +2,7 @@ module drinkshop {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.base;
-
-    requires static org.controlsfx.controls;
+    requires org.controlsfx.controls;
 
     opens drinkshop.ui to javafx.fxml;
     exports drinkshop.ui;
