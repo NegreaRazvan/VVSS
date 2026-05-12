@@ -33,8 +33,9 @@ import static org.mockito.Mockito.*;
  *
  * Cyclomatic Complexity: CC = 6 decisions + 1 = 7
  */
+
 @RunWith(MockitoJUnitRunner.class)
-class StocServiceWBTTest {
+public class StocServiceWBTTest {
 
     @Mock
     private Repository<Integer, Stoc> stocRepo;
@@ -46,7 +47,7 @@ class StocServiceWBTTest {
     private List<Stoc> stocList;
 
     @Before
-    void setUp() {
+    public void setUp() {
         stocList = new ArrayList<>();
         // Setam mock-ul sa returneze lista noastra de fiecare data cand se apeleaza findAll().
         // lenient() previne exceptiile in testele unde findAll() nu ajunge sa fie apelat (ex: tc01, tc02).
@@ -54,7 +55,7 @@ class StocServiceWBTTest {
     }
 
     @After
-    void tearDown() {
+    public void tearDown() {
         stocList = null;
     }
 
@@ -63,46 +64,46 @@ class StocServiceWBTTest {
     // =========================================================================
 
     @Test
-    void tc01_reteta_null_throwsIllegalArgumentException() {
+    public void tc01_reteta_null_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class,
                 () -> stocService.areSuficient(null));
     }
 
     @Test
-    void tc02_ingredienteNull_returnsTrue() {
+    public void tc02_ingredienteNull_returnsTrue() {
         Reteta reteta = new Reteta(1, null);
         assertTrue(stocService.areSuficient(reteta));
     }
 
     @Test
-    void tc03_ingredienteEmpty_returnsTrue() {
+    public void tc03_ingredienteEmpty_returnsTrue() {
         Reteta reteta = new Reteta(1, new ArrayList<>());
         assertTrue(stocService.areSuficient(reteta));
     }
 
     @Test
-    void tc04_necesar_zero_returnsTrue() {
+    public void tc04_necesar_zero_returnsTrue() {
         stocList.add(new Stoc(1, "apa", 0.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 0.0)));
         assertTrue(stocService.areSuficient(reteta));
     }
 
     @Test
-    void tc05_stocInsuficient_returnsFalse() {
+    public void tc05_stocInsuficient_returnsFalse() {
         stocList.add(new Stoc(1, "apa", 50.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 100.0)));
         assertFalse(stocService.areSuficient(reteta));
     }
 
     @Test
-    void tc06_stocSuficient_returnsTrue() {
+    public void tc06_stocSuficient_returnsTrue() {
         stocList.add(new Stoc(1, "apa", 150.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 100.0)));
         assertTrue(stocService.areSuficient(reteta));
     }
 
     @Test
-    void tc07_douaIngredienteSuficiente_returnsTrue() {
+    public void tc07_douaIngredienteSuficiente_returnsTrue() {
         stocList.add(new Stoc(1, "apa", 200.0, 0.0));
         stocList.add(new Stoc(2, "zahar", 300.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(
@@ -113,7 +114,7 @@ class StocServiceWBTTest {
     }
 
     @Test
-    void tc08_alDoileaIngredientInsuficient_returnsFalse() {
+    public void tc08_alDoileaIngredientInsuficient_returnsFalse() {
         stocList.add(new Stoc(1, "apa", 200.0, 0.0));
         stocList.add(new Stoc(2, "zahar", 50.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(
@@ -124,14 +125,14 @@ class StocServiceWBTTest {
     }
 
     @Test
-    void tc09_disponibilEgalNecesar_returnsTrue() {
+    public void tc09_disponibilEgalNecesar_returnsTrue() {
         stocList.add(new Stoc(1, "apa", 100.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 100.0)));
         assertTrue(stocService.areSuficient(reteta));
     }
 
     @Test
-    void tc10_necesar_negativ_returnsTrue() {
+    public void tc10_necesar_negativ_returnsTrue() {
         stocList.add(new Stoc(1, "apa", 0.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", -5.0)));
         assertTrue(stocService.areSuficient(reteta));
@@ -142,7 +143,7 @@ class StocServiceWBTTest {
     // =========================================================================
 
     @Test
-    void test_getAll() {
+    public void test_getAll() {
         stocList.add(new Stoc(1, "cafea", 10.0, 0.0));
 
         List<Stoc> rezultate = stocService.getAll();
@@ -153,7 +154,7 @@ class StocServiceWBTTest {
     }
 
     @Test
-    void test_add() {
+    public void test_add() {
         Stoc s = new Stoc(1, "lapte", 50.0, 0.0);
 
         stocService.add(s);
@@ -162,7 +163,7 @@ class StocServiceWBTTest {
     }
 
     @Test
-    void test_update() {
+    public void test_update() {
         Stoc s = new Stoc(1, "sirop", 20.0, 0.0);
 
         stocService.update(s);
@@ -171,14 +172,14 @@ class StocServiceWBTTest {
     }
 
     @Test
-    void test_delete() {
+    public void test_delete() {
         stocService.delete(1);
 
         verify(stocRepo, times(1)).delete(1); // Verificare mock
     }
 
     @Test
-    void test_consuma_stocInsuficient_throwsException() {
+    public void test_consuma_stocInsuficient_throwsException() {
         stocList.add(new Stoc(1, "apa", 20.0, 0.0));
         Reteta reteta = new Reteta(1, List.of(new IngredientReteta("apa", 100.0)));
 
@@ -187,7 +188,7 @@ class StocServiceWBTTest {
     }
 
     @Test
-    void test_consuma_intrerupeCandRamasZero() {
+    public void test_consuma_intrerupeCandRamasZero() {
         Stoc stoc1 = new Stoc(1, "zahar", 100.0, 0.0);
         Stoc stoc2 = new Stoc(2, "zahar", 50.0, 0.0);
         stocList.add(stoc1);
@@ -208,7 +209,7 @@ class StocServiceWBTTest {
     }
 
     @Test
-    void test_consuma_extrageDinMaiMulteStocuri() {
+    public void test_consuma_extrageDinMaiMulteStocuri() {
         Stoc stoc1 = new Stoc(1, "apa", 50.0, 0.0);
         Stoc stoc2 = new Stoc(2, "apa", 50.0, 0.0);
         stocList.add(stoc1);
@@ -227,7 +228,7 @@ class StocServiceWBTTest {
     }
 
     @Test
-    void test_consuma_cantitateZero() {
+    public void test_consuma_cantitateZero() {
         Stoc stoc1 = new Stoc(1, "apa", 100.0, 0.0);
         stocList.add(stoc1);
 
