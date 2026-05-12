@@ -5,71 +5,55 @@ import drinkshop.domain.Product;
 import drinkshop.domain.TipBautura;
 import drinkshop.service.validator.ProductValidator;
 import drinkshop.service.validator.ValidationException;
+import org.junit.Test;
+import org.junit.Assert;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-@Tag("ECP")
-@DisplayName("ECP Tests - ProductValidator.validate()")
-class ProductValidatorECPTest {
+public class ProductValidatorECPTest {
 
     private final ProductValidator validator = new ProductValidator();
 
-    @ParameterizedTest
-    @DisplayName("TC1_ECP: Valid product - non-empty name and positive price")
-    @CsvSource({
-            "1, Cappuccino, 12.5, MILK_COFFEE, DAIRY"
-    })
-    void tc1_ecp_validProduct(int id, String nume, double pret, CategorieBautura categorie, TipBautura tip) {
-        Product product = new Product(id, nume, pret, categorie, tip);
-
-        assertDoesNotThrow(() -> validator.validate(product));
+    @Test
+    public void tc1_ecp_validProduct() {
+        Product product = new Product(1, "Cappuccino", 12.5, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        try {
+            validator.validate(product);
+        } catch (ValidationException e) {
+            Assert.fail("Should not throw exception for valid product");
+        }
     }
 
-    @ParameterizedTest
-    @DisplayName("TC2_ECP: Invalid product - empty name")
-    @ValueSource(strings = {"", "   "})
-    void tc2_ecp_invalidNumeEmpty(String nume) {
-        Product product = new Product(2, nume, 10.0, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
-
-        ValidationException exception = assertThrows(ValidationException.class,
-                () -> validator.validate(product));
-
-        assertTrue(exception.getMessage().contains("Numele nu poate fi gol!"));
+    @Test
+    public void tc2_ecp_invalidNumeEmpty() {
+        Product product = new Product(2, "", 10.0, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
+        try {
+            validator.validate(product);
+            Assert.fail("Should have thrown ValidationException for empty name");
+        } catch (ValidationException exception) {
+            Assert.assertTrue(exception.getMessage().contains("Numele nu poate fi gol!"));
+        }
     }
 
-    @ParameterizedTest
-    @DisplayName("TC3_ECP: Invalid product - negative price")
-    @CsvSource({
-            "3, Espresso, -5.0, CLASSIC_COFFEE, BASIC"
-    })
-    void tc3_ecp_invalidPretNegativ(int id, String nume, double pret, CategorieBautura categorie, TipBautura tip) {
-        Product product = new Product(id, nume, pret, categorie, tip);
-
-        ValidationException exception = assertThrows(ValidationException.class,
-                () -> validator.validate(product));
-
-        assertTrue(exception.getMessage().contains("Pret invalid!"));
+    @Test
+    public void tc3_ecp_invalidPretNegativ() {
+        Product product = new Product(3, "Espresso", -5.0, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
+        try {
+            validator.validate(product);
+            Assert.fail("Should have thrown ValidationException for negative price");
+        } catch (ValidationException exception) {
+            Assert.assertTrue(exception.getMessage().contains("Pret invalid!"));
+        }
     }
 
-    @ParameterizedTest
-    @DisplayName("TC4_ECP: Invalid product - null name and zero price")
-    @CsvSource({
-            "4, 0.0, TEA, WATER_BASED"
-    })
-    void tc4_ecp_invalidNumeNullPretZero(int id, double pret, CategorieBautura categorie, TipBautura tip) {
-        Product product = new Product(id, null, pret, categorie, tip);
-
-        ValidationException exception = assertThrows(ValidationException.class,
-                () -> validator.validate(product));
-
-        String msg = exception.getMessage();
-        assertTrue(msg.contains("Numele nu poate fi gol!"));
-        assertTrue(msg.contains("Pret invalid!"));
+    @Test
+    public void tc4_ecp_invalidNumeNullPretZero() {
+        Product product = new Product(4, null, 0.0, CategorieBautura.TEA, TipBautura.WATER_BASED);
+        try {
+            validator.validate(product);
+            Assert.fail("Should have thrown ValidationException for null name/zero price");
+        } catch (ValidationException exception) {
+            String msg = exception.getMessage();
+            Assert.assertTrue(msg.contains("Numele nu poate fi gol!"));
+            Assert.assertTrue(msg.contains("Pret invalid!"));
+        }
     }
 }

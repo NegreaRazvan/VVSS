@@ -5,7 +5,11 @@ import drinkshop.domain.Reteta;
 import drinkshop.domain.Stoc;
 import drinkshop.repository.Repository;
 import drinkshop.service.StocService;
-import org.junit.jupiter.api.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,14 +23,14 @@ import static org.mockito.Mockito.*;
 /// total 4 teste implementate
 /// Scenariu 3: S->R->E
 /// Step 1: Unit testing
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StocServiceMockitoTest {
 
     private Stoc stoc;
     private Repository<Integer, Stoc> stocRepo;
     private StocService stocService;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         // cream obiecte mock pentru cele doua clase dependente: Repository (R) si Stoc (E)
         stoc = mock(Stoc.class);
@@ -34,7 +38,7 @@ public class StocServiceMockitoTest {
         stocService = new StocService(stocRepo);
     }
 
-    @AfterEach
+    @After
     public void tearDown() {
         stocService = null;
         stocRepo = null;
@@ -42,7 +46,6 @@ public class StocServiceMockitoTest {
     }
 
     @Test
-    @Order(1)
     public void testGetAllValid() {
         // cream obiecte mock suplimentare
         Stoc stoc1 = mock(Stoc.class);
@@ -60,8 +63,7 @@ public class StocServiceMockitoTest {
     }
 
     @Test
-    @Order(2)
-    void testAddValid() {
+    public void testAddValid() {
         // asociem comportament obiectului mock Repository
         when(stocRepo.save(stoc)).thenReturn(stoc);
 
@@ -78,8 +80,7 @@ public class StocServiceMockitoTest {
     }
 
     @Test
-    @Order(3)
-    void testAreSuficientReturnsTrueWhenStocSuficient() {
+    public void testAreSuficientReturnsTrueWhenStocSuficient() {
         // simulam un stoc mock cu ingredient "apa" si cantitate 100.0
         when(stoc.getIngredient()).thenReturn("apa");
         when(stoc.getCantitate()).thenReturn(100.0);
@@ -97,8 +98,7 @@ public class StocServiceMockitoTest {
     }
 
     @Test
-    @Order(4)
-    void testAreSuficientReturnsFalseWhenStocInsuficient() {
+    public void testAreSuficientReturnsFalseWhenStocInsuficient() {
         // simulam un stoc mock cu cantitate insuficienta
         when(stoc.getIngredient()).thenReturn("zahar");
         when(stoc.getCantitate()).thenReturn(10.0);
