@@ -15,7 +15,7 @@ public class OrderItemValidator implements Validator<OrderItem> {
         if (item.getQuantity() <= 0)
             errors += "Cantitate invalida!\n";
 
-        if (!errors.isEmpty())
+        if (errors.length() != 0)
             throw new ValidationException(errors);
     }
 }

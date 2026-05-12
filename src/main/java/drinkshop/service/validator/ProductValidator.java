@@ -18,7 +18,7 @@ public class ProductValidator implements Validator<Product> {
         if (product.getPret() <= 0)
             errors += "Pret invalid!\n";
 
-        if (!errors.isEmpty())
+        if (errors.length() != 0)
             throw new ValidationException(errors);
     }
 }
