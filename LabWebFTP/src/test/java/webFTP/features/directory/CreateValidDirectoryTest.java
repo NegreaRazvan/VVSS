@@ -6,10 +6,11 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import webFTP.features.TestSetup;
 import webFTP.steps.serenity.*;
 
 @RunWith(SerenityRunner.class)
-public class CreateValidDirectoryTest {
+public class CreateValidDirectoryTest extends TestSetup {
 
     @Managed(uniqueSession = true)
     public WebDriver webdriver;

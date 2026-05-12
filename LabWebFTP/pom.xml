@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <serenity.version>2.3.2</serenity.version>
-        <webdriver.driver>firefox</webdriver.driver>
+        <webdriver.driver>edge</webdriver.driver>
     </properties>
 
     <repositories>
@@ -37,7 +37,13 @@
       </pluginRepository>
     </pluginRepositories>
 
+
     <dependencies>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.9.2</version>
+        </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-core</artifactId>

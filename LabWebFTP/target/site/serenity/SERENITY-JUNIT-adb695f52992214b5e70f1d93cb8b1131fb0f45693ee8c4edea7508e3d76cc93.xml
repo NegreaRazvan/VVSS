@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="1" failures="0" name="webFTP.features.directory.CreateValidDirectoryTest" skipped="0" tests="1" time="0.0" timestamp="2026-05-13 01:21:06"><testcase classname="webFTP.features.directory.CreateValidDirectoryTest" name="Initialisation"><error message="java.net.UnknownHostException: msedgedriver.azureedge.net" type="io.github.bonigarcia.wdm.config.WebDriverManagerException">java.net.UnknownHostException: msedgedriver.azureedge.net</error><system-err>java.net.UnknownHostException: msedgedriver.azureedge.net&#13;
+io.github.bonigarcia.wdm.WebDriverManager.getDriversFromXml(WebDriverManager.java:1588)&#13;
+io.github.bonigarcia.wdm.managers.EdgeDriverManager.getDriverUrls(EdgeDriverManager.java:115)&#13;
+io.github.bonigarcia.wdm.WebDriverManager.createUrlHandler(WebDriverManager.java:1442)&#13;
+io.github.bonigarcia.wdm.WebDriverManager.download(WebDriverManager.java:1268)&#13;
+io.github.bonigarcia.wdm.WebDriverManager.manage(WebDriverManager.java:1184)&#13;
+io.github.bonigarcia.wdm.WebDriverManager.fallback(WebDriverManager.java:1437)&#13;
+io.github.bonigarcia.wdm.WebDriverManager.handleException(WebDriverManager.java:1415)&#13;
+io.github.bonigarcia.wdm.WebDriverManager.manage(WebDriverManager.java:1190)&#13;
+io.github.bonigarcia.wdm.WebDriverManager.setup(WebDriverManager.java:427)&#13;
+webFTP.features.TestSetup.setupClass(TestSetup.java:9)&#13;
+</system-err></testcase></testsuite>
