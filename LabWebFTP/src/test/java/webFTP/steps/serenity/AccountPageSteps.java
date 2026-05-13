@@ -54,4 +54,29 @@ public class AccountPageSteps {
         accountPage.deleteDirectory();
     }
 
+    @Step
+    public void rename_selected_directory() {
+        accountPage.click_rename_button();
+    }
+
+    @Step
+    public void upload_file() {
+        accountPage.click_upload_button();
+    }
+
+    @Step
+    public void navigate_into_directory(String dirName) {
+        accountPage.navigate_into_directory(dirName);
+    }
+
+    @Step
+    public void navigate_back() {
+        accountPage.navigate_back();
+    }
+
+    @Step
+    public void should_be_in_directory(String expectedPath) {
+        Assert.assertTrue(accountPage.getCurrentDirectoryPath().contains(expectedPath));
+    }
+
 }

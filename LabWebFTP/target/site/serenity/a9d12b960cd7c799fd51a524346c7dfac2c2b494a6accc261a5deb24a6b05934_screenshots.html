@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Screenshots</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--[if IE 7]>
+<!--<link rel="stylesheet" href="font-awesome/css/font-awesome-ie7.min.css">-->
+
+<link rel="stylesheet" type="text/css" href="fontawesome-free-5.7.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="fontawesome-free-5.7.2-web/css/v4-shims.min.css">
+
+<!-- JQuery -->
+<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><link rel="stylesheet" type="text/css" href="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.css">
+<link rel="stylesheet" type="text/css" href="chartist/dist/chartist.min.css">
+<script src="chartist/dist/chartist.min.js"></script>
+<script src="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
+<!-- Required Stylesheets -->
+<link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+
+<!-- Required Javascript -->
+<script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.20/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/1.10.20/time-elapsed-dhms.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.20/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.20/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+<script>
+    jQuery.fn.dataTable.ext.type.order['time-elapsed-dhms-pre'] = function(data) {
+
+        var matches = data.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)/i);
+        var multipliers = {
+            ms: 1,
+            s: 1000,
+            m: 60000,
+            h: 3600000,
+            d: 86400000
+        };
+
+        if (matches) {
+            var multiplier = multipliers[matches[2].toLowerCase()];
+            return parseFloat(matches[1]) * multiplier;
+        } else {
+            return -1;
+        };
+    };
+</script>
+<link rel="stylesheet" href="css/core.css"/>
+<link rel="stylesheet" href="css/link.css"/>
+<link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/><!-- Nivo Slider -->
+<link rel="stylesheet" href="nivo-slider/3.2/nivo-slider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="nivo-slider/3.2/themes/default/default.css" type="text/css" media="screen" />
+<script src="nivo-slider/3.2/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
+        var screenshotIndex = getUrlVars()["screenshot"];
+
+        $(window).load(function () {
+            $('#slider').nivoSlider({
+                startSlide: screenshotIndex,
+                effect: 'fade',
+                animSpeed: 200,
+                manualAdvance: true
+            });
+        });
+
+        $(window).keydown(function(e) {
+            switch(e.which) {
+                case 37:
+                    $('a.nivo-prevNav').click();
+                    break;
+                case 39:
+                    $('a.nivo-nextNav').click();
+                    break;
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+<div id="topheader">
+    <div id="topbanner">
+        <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
+        <div id="projectname-banner" style="float:right">
+            <span class="projectname">
+                <span class="projecttitle">Demo Project using Serenity and JUnit</span>
+                <span class="projectsubtitle"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="middlecontent">
+    <div id="contenttop">
+        <div class="middlebg">
+            <span class="breadcrumbs">
+                <a href="index.html">Home</a>
+                > <span class="truncate-40"><a
+                    href="f70d3850b6addfcc8e457d3b0e49bbfb560e840592042288a76fbd4223a26417.html">Rename Directory Valid Test</a></span>
+                > <span class="truncate-60"><a
+                    href="a9d12b960cd7c799fd51a524346c7dfac2c2b494a6accc261a5deb24a6b05934.html">Rename directory </a></span>
+                > Screenshots
+            </span>
+        </div>
+        <div class="rightbg"></div>
+    </div>
+
+    <div class="clr"></div>
+
+    <!--/* starts second table*/-->
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#"><i class="fa fa-check-square-o"></i> Overall Test Results</a>
+        </li>
+        <li >
+            <a href="capabilities.html"><i class="fa fa-book"></i> Requirements</a>
+        </li>
+        <li >
+            <a href="7ea0a5e2d679b9deeda9910ae4a9bcd3a281e0d908303a9e16e486103e98880c.html"><i class="fa fa-comments-o"></i> Capabilities</a>
+        </li>
+        <li >
+            <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="fa fa-comments-o"></i> Features</a>
+        </li>
+        <li >
+            <a href="2a4631d87648e59c428d4cf0e9247f9d286e4679f436ca2ce872e931eb4dfd58.html"><i class="fa fa-comments-o"></i> Stories</a>
+        </li>
+    </ul>
+    <span class="date-and-time"><a href="build-info.html"><i class="fa fa-info-circle"></i></a> Report generated 13-05-2026 14:46</span>
+    <br style="clear:left"/>
+</div>
+
+    <div class="clr"></div>
+
+
+    <div id="contentbody">
+        <div class="titlebar">
+            <div class="story-title">
+                <table class="outcome-header">
+                    <tr>
+                        <td>
+                            <div>
+                                <h3 class="discreet-story-header">
+                                    <i class="fa fa-2x fa-comments-o"></i>
+                                    <span class="story-header-title">Rename Directory Valid Test </span>
+                                    <span class="badge tag-badge" style="">Feature</span>
+                                </h3>
+
+                                <div class="discreet-requirement-narrative-title">
+                                
+                                </div>
+                            </div>
+
+                        </td>
+                        <td valign="top" align="right">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="story-title">
+                <table class="outcome-header">
+                    <tr>
+                        <td colspan="2" class="test-title-bar">
+                            <span class="outcome-icon"><a href='##beforetable'><i class='fa fa-check-circle-o success-icon fa-2x' title='SUCCESS'></i></a></span>
+                            <span class="test-case-title">
+                                <span class="success-color">Rename directory
+                                    <span class="related-issue-title"></span>
+                                </span>
+                            </span>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr"></div>
+
+    <div class="story-title">
+        <h3>Scenario:</h3>
+        <div class="scenario">Click save cookies<br>Login steps: localhost, vvta1, vvta1<br>Should be in user directory: /home/vvta1<br>New directory<br>Create directory: rrA_dir1_1778672737871<br>Should be able to see new directory: rrA_dir1_1778672737871<br>Select directory to delete: rrA_dir1_1778672737871<br>Rename selected directory<br>Rename directory: rrA_dir1_1778672737871, rrB_dir1_1778672737872<br>Should be able to see new directory: rrB_dir1_1778672737872<br>Should not be able to see new directory: rrA_dir1_1778672737871<br>Select directory to delete: rrB_dir1_1778672737872<br>Delete selected directory<br>Delete directory: rrB_dir1_1778672737872<br>Should not be able to see new directory: rrB_dir1_1778672737872<br>Logout<br>Should see logout message: You have logged out from the FTP server.</div>
+    </div>
+
+    <div id="beforetable"></div>
+    <div id="contenttilttle">
+        <div class="slider-wrapper theme-default">
+            <div id="slider">
+                <img src="4d4b2e15987688bf937d116f32747eb1d02b3bd02edab9477afbd8368d8f3bdc.png" title=" Rename directory " width="1241"/>
+                <img src="4d4b2e15987688bf937d116f32747eb1d02b3bd02edab9477afbd8368d8f3bdc.png" title=" Click save cookies" width="1241"/>
+                <img src="11cb9c3a3c54123294055de0aefc7080f1db5b0f599289cc95298249adcf3f43.png" title=" Click save cookies (completed)" width="1241"/>
+                <img src="9aa1a8c4b3cc75febefa441cf28f5fd7f15f04db2cd7928a8fdfac7109947626.png" title=" Login steps: localhost, vvta1, vvta1" width="1241"/>
+                <img src="9aa1a8c4b3cc75febefa441cf28f5fd7f15f04db2cd7928a8fdfac7109947626.png" title=" Select server name: localhost" width="1241"/>
+                <img src="9aa1a8c4b3cc75febefa441cf28f5fd7f15f04db2cd7928a8fdfac7109947626.png" title=" Enter username: vvta1" width="1241"/>
+                <img src="c5efb59cb5030af63159e8a4245f11d80a5890d6a518a156d661f7c4b7e2e787.png" title=" Enter username: vvta1 (completed)" width="1241"/>
+                <img src="c5efb59cb5030af63159e8a4245f11d80a5890d6a518a156d661f7c4b7e2e787.png" title=" Enter password: vvta1" width="1241"/>
+                <img src="2f859b488b59d65aad0cceec89081fd542a50dc6f2238dc289111446a9a0a60f.png" title=" Enter password: vvta1 (completed)" width="1241"/>
+                <img src="2f859b488b59d65aad0cceec89081fd542a50dc6f2238dc289111446a9a0a60f.png" title=" Click login" width="1241"/>
+                <img src="ddf305e0a5c0878524491907d84b82da16746d6349a6c343f9f611f11bd0201c.png" title=" Click login (completed)" width="1241"/>
+                <img src="ddf305e0a5c0878524491907d84b82da16746d6349a6c343f9f611f11bd0201c.png" title=" Login steps: localhost, vvta1, vvta1 (completed)" width="1241"/>
+                <img src="ddf305e0a5c0878524491907d84b82da16746d6349a6c343f9f611f11bd0201c.png" title=" Should be in user directory: /home/vvta1" width="1241"/>
+                <img src="e8e99e9d7745ffd011a6df057c1a854bcdb16f2ca8f05b2787836250a7a03a4b.png" title=" New directory" width="1241"/>
+                <img src="aaa5ebfc153a29adf5c8671b04556d478db8934e0c08c5cdeb37792016705139.png" title=" Create directory: rrA_dir1_1778672737871" width="1241"/>
+                <img src="aaa5ebfc153a29adf5c8671b04556d478db8934e0c08c5cdeb37792016705139.png" title=" Enter directory: rrA_dir1_1778672737871" width="1241"/>
+                <img src="aaa5ebfc153a29adf5c8671b04556d478db8934e0c08c5cdeb37792016705139.png" title=" Create directory" width="1241"/>
+                <img src="10100489fd19726b30d7e34fef7ae1e0602ad88899666a1fd49729bb957a28f4.png" title=" Create directory (completed)" width="1241"/>
+                <img src="10100489fd19726b30d7e34fef7ae1e0602ad88899666a1fd49729bb957a28f4.png" title=" Should be able to see message: Directory rrA_dir1_1778672737871 was successfully created." width="1241"/>
+                <img src="10100489fd19726b30d7e34fef7ae1e0602ad88899666a1fd49729bb957a28f4.png" title=" Should be able to see message: Directory rrA_dir1_1778672737871 was successfully created. (completed)" width="1241"/>
+                <img src="10100489fd19726b30d7e34fef7ae1e0602ad88899666a1fd49729bb957a28f4.png" title=" Back" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Back (completed)" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Create directory: rrA_dir1_1778672737871 (completed)" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Should be able to see new directory: rrA_dir1_1778672737871" width="1241"/>
+                <img src="b487e3cf47fe0d5373475f44edad4d17e727ddf2875c21c571916a4d2ec7e9c9.png" title=" Select directory to delete: rrA_dir1_1778672737871" width="1241"/>
+                <img src="93ceab5b58f9456da209fadf1d49a5f01ab1832d1db6e43cf6933fd039971432.png" title=" Rename selected directory" width="1241"/>
+                <img src="2260cd7d505502212ace3bcfbe58a8be301c0a1ecc54cb56d011e89c05202d05.png" title=" Rename directory: rrA_dir1_1778672737871, rrB_dir1_1778672737872" width="1241"/>
+                <img src="2260cd7d505502212ace3bcfbe58a8be301c0a1ecc54cb56d011e89c05202d05.png" title=" Enter new name: rrB_dir1_1778672737872" width="1241"/>
+                <img src="2260cd7d505502212ace3bcfbe58a8be301c0a1ecc54cb56d011e89c05202d05.png" title=" Confirm rename" width="1241"/>
+                <img src="5bbd34954b19d1475095c26ef470f72026951362beb31d6bf4e40d4feddb769b.png" title=" Confirm rename (completed)" width="1241"/>
+                <img src="5bbd34954b19d1475095c26ef470f72026951362beb31d6bf4e40d4feddb769b.png" title=" Should see message: was successfully renamed to" width="1241"/>
+                <img src="5bbd34954b19d1475095c26ef470f72026951362beb31d6bf4e40d4feddb769b.png" title=" Should see message: was successfully renamed to (completed)" width="1241"/>
+                <img src="5bbd34954b19d1475095c26ef470f72026951362beb31d6bf4e40d4feddb769b.png" title=" Back" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Back (completed)" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Rename directory: rrA_dir1_1778672737871, rrB_dir1_1778672737872 (completed)" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Should be able to see new directory: rrB_dir1_1778672737872" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Should not be able to see new directory: rrA_dir1_1778672737871" width="1241"/>
+                <img src="f7063a9a33538b29bfed771a7d85566074ed3e5fc124d894b531688867b50699.png" title=" Select directory to delete: rrB_dir1_1778672737872" width="1241"/>
+                <img src="58d1294155fdac1405e93ea336e5ac01cc89a84393be685209c2a109f2d27154.png" title=" Delete selected directory" width="1241"/>
+                <img src="58d1294155fdac1405e93ea336e5ac01cc89a84393be685209c2a109f2d27154.png" title=" Delete directory: rrB_dir1_1778672737872" width="1241"/>
+                <img src="58d1294155fdac1405e93ea336e5ac01cc89a84393be685209c2a109f2d27154.png" title=" Should be able to see message: Directory rrB_dir1_1778672737872" width="1241"/>
+                <img src="813de6cf295b684a941fa83c203952bdbda30972aa1f4adb2492fa96e3404b99.png" title=" Delete directory" width="1241"/>
+                <img src="813de6cf295b684a941fa83c203952bdbda30972aa1f4adb2492fa96e3404b99.png" title=" Should be able to see message: Processing directory /home/vvta1/rrB_dir1_1778672737872" width="1241"/>
+                <img src="813de6cf295b684a941fa83c203952bdbda30972aa1f4adb2492fa96e3404b99.png" title=" Should be able to see message: Processing directory /home/vvta1/rrB_dir1_1778672737872 (completed)" width="1241"/>
+                <img src="813de6cf295b684a941fa83c203952bdbda30972aa1f4adb2492fa96e3404b99.png" title=" Back" width="1241"/>
+                <img src="e522bbd4875319e53d2db2ace44a6745b29f65ffa55fe3ba270e5b04e30ad129.png" title=" Back (completed)" width="1241"/>
+                <img src="e522bbd4875319e53d2db2ace44a6745b29f65ffa55fe3ba270e5b04e30ad129.png" title=" Delete directory: rrB_dir1_1778672737872 (completed)" width="1241"/>
+                <img src="e522bbd4875319e53d2db2ace44a6745b29f65ffa55fe3ba270e5b04e30ad129.png" title=" Should not be able to see new directory: rrB_dir1_1778672737872" width="1241"/>
+                <img src="b2c125b02eafcabd8296aa8dd7912f59d676446a0f7eba72e33ce547eeb442ee.png" title=" Logout" width="1241"/>
+                <img src="b2c125b02eafcabd8296aa8dd7912f59d676446a0f7eba72e33ce547eeb442ee.png" title=" Should see logout message: You have logged out from the FTP server." width="1241"/>
+                <img src="4d4b2e15987688bf937d116f32747eb1d02b3bd02edab9477afbd8368d8f3bdc.png" title=" Rename directory " width="1241"/>
+                <img src="4d4b2e15987688bf937d116f32747eb1d02b3bd02edab9477afbd8368d8f3bdc.png" title=" Click save cookies" width="1241"/>
+                <img src="11cb9c3a3c54123294055de0aefc7080f1db5b0f599289cc95298249adcf3f43.png" title=" Click save cookies (completed)" width="1241"/>
+                <img src="9aa1a8c4b3cc75febefa441cf28f5fd7f15f04db2cd7928a8fdfac7109947626.png" title=" Login steps: localhost, vvta1, vvta1" width="1241"/>
+                <img src="9aa1a8c4b3cc75febefa441cf28f5fd7f15f04db2cd7928a8fdfac7109947626.png" title=" Select server name: localhost" width="1241"/>
+                <img src="9aa1a8c4b3cc75febefa441cf28f5fd7f15f04db2cd7928a8fdfac7109947626.png" title=" Enter username: vvta1" width="1241"/>
+                <img src="7b444f1338338ddf635e4bed86fa2713d14dc1bd8f809c2e8d44aa3e566a5914.png" title=" Enter username: vvta1 (completed)" width="1241"/>
+                <img src="7b444f1338338ddf635e4bed86fa2713d14dc1bd8f809c2e8d44aa3e566a5914.png" title=" Enter password: vvta1" width="1241"/>
+                <img src="04bc9490b2bcff1614fa530600249104c86cfe4db626ca676668d7b21df16c6b.png" title=" Enter password: vvta1 (completed)" width="1241"/>
+                <img src="04bc9490b2bcff1614fa530600249104c86cfe4db626ca676668d7b21df16c6b.png" title=" Click login" width="1241"/>
+                <img src="c6ed688915ecc152a7b022b72ff9ec025063a3dfa322401137f4804e78dc72d8.png" title=" Click login (completed)" width="1241"/>
+                <img src="c6ed688915ecc152a7b022b72ff9ec025063a3dfa322401137f4804e78dc72d8.png" title=" Login steps: localhost, vvta1, vvta1 (completed)" width="1241"/>
+                <img src="c6ed688915ecc152a7b022b72ff9ec025063a3dfa322401137f4804e78dc72d8.png" title=" Should be in user directory: /home/vvta1" width="1241"/>
+                <img src="e8e99e9d7745ffd011a6df057c1a854bcdb16f2ca8f05b2787836250a7a03a4b.png" title=" New directory" width="1241"/>
+                <img src="4ca3380405c46f7e059e7ee6696fa39713d547e92e1aa07a368d1d121c6434d9.png" title=" Create directory: rrA_dir2_1778672759399" width="1241"/>
+                <img src="4ca3380405c46f7e059e7ee6696fa39713d547e92e1aa07a368d1d121c6434d9.png" title=" Enter directory: rrA_dir2_1778672759399" width="1241"/>
+                <img src="4ca3380405c46f7e059e7ee6696fa39713d547e92e1aa07a368d1d121c6434d9.png" title=" Create directory" width="1241"/>
+                <img src="634192007f4ac6431dbcecf7b514e5eb705c34384a1e6471db1c62a6b83e981e.png" title=" Create directory (completed)" width="1241"/>
+                <img src="634192007f4ac6431dbcecf7b514e5eb705c34384a1e6471db1c62a6b83e981e.png" title=" Should be able to see message: Directory rrA_dir2_1778672759399 was successfully created." width="1241"/>
+                <img src="634192007f4ac6431dbcecf7b514e5eb705c34384a1e6471db1c62a6b83e981e.png" title=" Should be able to see message: Directory rrA_dir2_1778672759399 was successfully created. (completed)" width="1241"/>
+                <img src="634192007f4ac6431dbcecf7b514e5eb705c34384a1e6471db1c62a6b83e981e.png" title=" Back" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Back (completed)" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Create directory: rrA_dir2_1778672759399 (completed)" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Should be able to see new directory: rrA_dir2_1778672759399" width="1241"/>
+                <img src="599430c435ed13b3258b4ac08a9080ace18d8e9844a7bdf17a19f620da15d266.png" title=" Select directory to delete: rrA_dir2_1778672759399" width="1241"/>
+                <img src="9324e44a42133bc5350736c32618babbbabd4d67ddde84361240f6ad8520e6ec.png" title=" Rename selected directory" width="1241"/>
+                <img src="15caa05b5c2a00045efda9aef17f8e552ec19a4eb4a33d6c0567b7a70fd80673.png" title=" Rename directory: rrA_dir2_1778672759399, rrB_dir2_1778672759400" width="1241"/>
+                <img src="15caa05b5c2a00045efda9aef17f8e552ec19a4eb4a33d6c0567b7a70fd80673.png" title=" Enter new name: rrB_dir2_1778672759400" width="1241"/>
+                <img src="15caa05b5c2a00045efda9aef17f8e552ec19a4eb4a33d6c0567b7a70fd80673.png" title=" Confirm rename" width="1241"/>
+                <img src="bc0d5240786a3918f5ad6079b52a274d221b7b4d18df993c58b27f7956d846c2.png" title=" Confirm rename (completed)" width="1241"/>
+                <img src="bc0d5240786a3918f5ad6079b52a274d221b7b4d18df993c58b27f7956d846c2.png" title=" Should see message: was successfully renamed to" width="1241"/>
+                <img src="bc0d5240786a3918f5ad6079b52a274d221b7b4d18df993c58b27f7956d846c2.png" title=" Should see message: was successfully renamed to (completed)" width="1241"/>
+                <img src="bc0d5240786a3918f5ad6079b52a274d221b7b4d18df993c58b27f7956d846c2.png" title=" Back" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Back (completed)" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Rename directory: rrA_dir2_1778672759399, rrB_dir2_1778672759400 (completed)" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Should be able to see new directory: rrB_dir2_1778672759400" width="1241"/>
+                <img src="5bfed6d574a2b376f3b5ebb8c9c24db61a2e7dac75cae2a852b910a1bebad255.png" title=" Should not be able to see new directory: rrA_dir2_1778672759399" width="1241"/>
+                <img src="e0804e928c9a6f6088374f8b9feb78067be05cb4d9cf0f79491254df4bbe2cc0.png" title=" Select directory to delete: rrB_dir2_1778672759400" width="1241"/>
+                <img src="94ff4c744e6232051ec485b211b73809e5f53bb7b7a93304e0f1849fc7015261.png" title=" Delete selected directory" width="1241"/>
+                <img src="94ff4c744e6232051ec485b211b73809e5f53bb7b7a93304e0f1849fc7015261.png" title=" Delete directory: rrB_dir2_1778672759400" width="1241"/>
+                <img src="94ff4c744e6232051ec485b211b73809e5f53bb7b7a93304e0f1849fc7015261.png" title=" Should be able to see message: Directory rrB_dir2_1778672759400" width="1241"/>
+                <img src="c0f3262c3c0a3b3f4f0e8ae0168f12f10082fb785a555229a8734496f7878c70.png" title=" Delete directory" width="1241"/>
+                <img src="c0f3262c3c0a3b3f4f0e8ae0168f12f10082fb785a555229a8734496f7878c70.png" title=" Should be able to see message: Processing directory /home/vvta1/rrB_dir2_1778672759400" width="1241"/>
+                <img src="c0f3262c3c0a3b3f4f0e8ae0168f12f10082fb785a555229a8734496f7878c70.png" title=" Should be able to see message: Processing directory /home/vvta1/rrB_dir2_1778672759400 (completed)" width="1241"/>
+                <img src="c0f3262c3c0a3b3f4f0e8ae0168f12f10082fb785a555229a8734496f7878c70.png" title=" Back" width="1241"/>
+                <img src="e522bbd4875319e53d2db2ace44a6745b29f65ffa55fe3ba270e5b04e30ad129.png" title=" Back (completed)" width="1241"/>
+                <img src="e522bbd4875319e53d2db2ace44a6745b29f65ffa55fe3ba270e5b04e30ad129.png" title=" Delete directory: rrB_dir2_1778672759400 (completed)" width="1241"/>
+                <img src="e522bbd4875319e53d2db2ace44a6745b29f65ffa55fe3ba270e5b04e30ad129.png" title=" Should not be able to see new directory: rrB_dir2_1778672759400" width="1241"/>
+                <img src="b2c125b02eafcabd8296aa8dd7912f59d676446a0f7eba72e33ce547eeb442ee.png" title=" Logout" width="1241"/>
+                <img src="b2c125b02eafcabd8296aa8dd7912f59d676446a0f7eba72e33ce547eeb442ee.png" title=" Should see logout message: You have logged out from the FTP server.: <span class='success-color'>SUCCESS</span>" width="1241"/>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div id="beforefooter"></div>
+<div id="bottomfooter">
+    <span class="version">Serenity BDD version 2.3.2</span>
+</div>
+</body>
+</html>

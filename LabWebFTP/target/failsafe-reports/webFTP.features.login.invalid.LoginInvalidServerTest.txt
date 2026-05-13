@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: webFTP.features.login.invalid.LoginInvalidServerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.27 s -- in webFTP.features.login.invalid.LoginInvalidServerTest

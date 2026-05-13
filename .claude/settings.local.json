@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn verify *)",
+      "PowerShell(Add-Type -AssemblyName System.IO; $bytes = [System.IO.File]::ReadAllBytes\\(\"D:\\\\VVSS\\\\Lab05\\\\Lab05.pdf\"\\); $text = [System.Text.Encoding]::UTF8.GetString\\($bytes\\); $text -replace '[^\\\\x20-\\\\x7E\\\\r\\\\n]', ' ' | Select-String -Pattern \"\\(task|Task|function|Function|test|Test|login|Login|scenario|Scenario|implement|Implement|require|Require|feature|Feature|scenario|directory|upload|download|delete|create|user|User|must|Must|shall|Shall|point|Point|grade|Grade\\)\" -AllMatches | Select-Object -First 60 | ForEach-Object { $_.Line })",
+      "PowerShell(python -c \"import sys; print\\(sys.version\\)\")",
+      "PowerShell(python -c \"import pypdf; print\\('ok'\\)\" 2>&1; python -c \"import PyPDF2; print\\('ok'\\)\" 2>&1; python -c \"import pdfminer; print\\('ok'\\)\" 2>&1)",
+      "PowerShell($content = Get-Content \"D:\\\\VVSS\\\\LabWebFTP\\\\target\\\\site\\\\serenity\\\\pagesource4970340396466744381.html.txt\" -Raw; $content | Select-String -Pattern \"buttontable|New dir|Delete|Rename|Upload|id=\" -AllMatches | Select-Object -First 40 | ForEach-Object { $_.Line } | Select-Object -Unique | Select-Object -First 30)",
+      "PowerShell($content = Get-Content \"D:\\\\VVSS\\\\LabWebFTP\\\\target\\\\site\\\\serenity\\\\pagesource8446464734367331060.html.txt\" -Raw; $content | Select-String -Pattern \"buttontable|New dir|Delete|Rename|Upload|BrowseForm|maintable|StatusbarForm\" -AllMatches | Select-Object -First 1 | ForEach-Object { $_.Line } | Select-Object -Unique)",
+      "PowerShell(Get-Content *)",
+      "PowerShell($content = Get-Content \"D:\\\\VVSS\\\\LabWebFTP\\\\target\\\\site\\\\serenity\\\\pagesource8523484084405835706.html.txt\" -Raw; Write-Host \"Length: $\\($content.Length\\)\"; $content.Substring\\(3000, 3000\\))",
+      "PowerShell($mvn = \"C:\\\\Users\\\\Razvan\\\\.m2\\\\wrapper\\\\dists\\\\apache-maven-3.8.5-bin\\\\5i5jha092a3i37g0paqnfr15e0\\\\apache-maven-3.8.5\\\\bin\\\\mvn.cmd\"; Set-Location \"D:\\\\VVSS\\\\LabWebFTP\"; & $mvn clean verify 2>&1 | Select-Object -Last 40)",
+      "PowerShell($c = Get-Content \"D:\\\\VVSS\\\\LabWebFTP\\\\target\\\\site\\\\serenity\\\\pagesource17249011724755406550.html.txt\" -Raw; $idx = $c.IndexOf\\(\"buttontable\"\\); if \\($idx -ge 0\\) { $c.Substring\\([Math]::Max\\(0,$idx-100\\), [Math]::Min\\(4000,$c.Length-$idx\\)\\) } else { \"no buttontable - checking title/form IDs\"; $c | Select-String -Pattern \"\\(Upload|Rename|New dir|BrowseForm|UploadForm\\)\" | Select-Object -First 10 | ForEach-Object { $_.Line.Substring\\(0, [Math]::Min\\(200,$_.Line.Length\\)\\) } })",
+      "PowerShell($c = Get-Content \"D:\\\\VVSS\\\\LabWebFTP\\\\target\\\\site\\\\serenity\\\\pagesource17249011724755406550.html.txt\" -Raw; Write-Host \"Length: $\\($c.Length\\)\"; $c.Substring\\(3000, [Math]::Min\\(5000, $c.Length-3000\\)\\))",
+      "PowerShell($mvn = \"C:\\\\Users\\\\Razvan\\\\.m2\\\\wrapper\\\\dists\\\\apache-maven-3.8.5-bin\\\\5i5jha092a3i37g0paqnfr15e0\\\\apache-maven-3.8.5\\\\bin\\\\mvn.cmd\"; Set-Location \"D:\\\\VVSS\\\\LabWebFTP\"; & $mvn clean verify 2>&1 | Select-Object -Last 25)",
+      "PowerShell($mvn = \"C:\\\\Users\\\\Razvan\\\\.m2\\\\wrapper\\\\dists\\\\apache-maven-3.8.5-bin\\\\5i5jha092a3i37g0paqnfr15e0\\\\apache-maven-3.8.5\\\\bin\\\\mvn.cmd\"; Set-Location \"D:\\\\VVSS\\\\LabWebFTP\"; & $mvn clean verify 2>&1 | Select-String -Pattern \"Tests executed|Tests passed|Tests failed|Tests with errors\")",
+      "PowerShell($c = Get-Content \"D:\\\\VVSS\\\\LabWebFTP\\\\target\\\\site\\\\serenity\\\\SERENITY-JUNIT-46bc6b74702a0c029b5fa36b7d1f1d1c3f60778df4b6bd7940a3e914b4ecedc7.xml\" -Raw; Write-Host \\($c -replace '&lt;','<' -replace '&gt;','>' -replace '&#13;',''\\))",
+      "Bash(\"C:\\\\Users\\\\Razvan\\\\.m2\\\\wrapper\\\\dists\\\\apache-maven-3.8.5-bin\\\\5i5jha092a3i37g0paqnfr15e0\\\\apache-maven-3.8.5\\\\bin\\\\mvn.cmd\" clean *)"
+    ]
+  }
+}

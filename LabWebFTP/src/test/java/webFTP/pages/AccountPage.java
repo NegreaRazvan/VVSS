@@ -4,6 +4,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -90,8 +91,38 @@ public class AccountPage extends PageObject {
     }
 
     public void deleteDirectory() {
-
         click_element_by_attribute_value(buttonList, "value", "Delete");
+    }
+
+    public void click_rename_button() {
+        click_element_by_attribute_value(buttonList, "value", "Rename");
+    }
+
+    public void click_upload_button() {
+        click_element_by_attribute_value(buttonList, "value", "Upload");
+    }
+
+    public void navigate_into_directory(String dirName) {
+        ((JavascriptExecutor) getDriver()).executeScript(
+            "var cur = document.forms['BrowseForm'].directory.value;" +
+            "document.forms['BrowseForm'].directory.value = cur + '/' + arguments[0];" +
+            "document.forms['BrowseForm'].submit();",
+            dirName
+        );
+    }
+
+    public void navigate_back() {
+        ((JavascriptExecutor) getDriver()).executeScript(
+            "var cur = document.forms['BrowseForm'].directory.value;" +
+            "var parent = cur.substring(0, cur.lastIndexOf('/'));" +
+            "if (parent === '') parent = '/';" +
+            "document.forms['BrowseForm'].directory.value = parent;" +
+            "document.forms['BrowseForm'].submit();"
+        );
+    }
+
+    public String getCurrentDirectoryPath() {
+        return currentDirectory.getValue();
     }
 
 }

@@ -1,0 +1,5 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Login empty password test","Login","SUCCESS","2026-05-13T14:44:19.8250376+03:00[Europe/Bucharest]","0.0","10.14"
+"Login empty username test","Login","SUCCESS","2026-05-13T14:44:20.3832692+03:00[Europe/Bucharest]","0.0","5.79"
+"Login invalid server parameterized test","Login","SUCCESS","2026-05-13T14:44:53.5677777+03:00[Europe/Bucharest]","0.0","24.21"
+"Login invalid server test","Login","SUCCESS","2026-05-13T14:44:53.9033363+03:00[Europe/Bucharest]","0.0","13.09"
